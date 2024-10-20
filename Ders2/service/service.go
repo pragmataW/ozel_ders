@@ -34,8 +34,11 @@ func (s *Service) Login(dtoUser dto.User) (string, error) {
 
 func (s *Service) Register(user dto.User) (error) {
 	_, err := s.repo.GetCredentials(user.UserName)
-	if err.Error() != "user not found"{
-		return errors.New("user already exists")
+	
+	if err != nil{
+		if err.Error() != "user not found"{
+			return errors.New("user already exists")
+		}
 	}
 	
 	encryptedPassword, err := s.encryptor.Encrypt(user.Password)

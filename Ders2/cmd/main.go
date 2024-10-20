@@ -38,9 +38,9 @@ func main() {
 
 	encryptor:= pkg.NewEncryptor(secretKey)
 	jwtGenerator := pkg.NewJwtGenerator(secretKey)
-	service := service.New(service.WithEncryptor(encryptor),
-							service.WithRepo(repo),
-							service.WithJwtGenerator(jwtGenerator))
+	service := service.New(service.WithEncryptor(&encryptor),
+							service.WithRepo(&repo),
+							service.WithJwtGenerator(&jwtGenerator))
 
 	controller := controller.New(service)
 
